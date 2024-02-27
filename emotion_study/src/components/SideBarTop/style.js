@@ -65,13 +65,12 @@ export const liList = css`
     
     font-weight: 1000;
 
-    width: 200px;
+    width: 170px;
     height: 50px;
     border: 1px solid #dbdbdb;
     margin-right: 20px;
     
     border-radius: 10px;
-
     &:hover {
         background-color: #dbdbdb;
     }

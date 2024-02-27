@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { FaCaretRight, FaCaretLeft } from "react-icons/fa";
 import * as S from "./style";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MENUS } from "../../constants/menu";
 

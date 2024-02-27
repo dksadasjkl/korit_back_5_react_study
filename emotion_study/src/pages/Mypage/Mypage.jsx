@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as S from './style';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 function Mypage(props) {
 

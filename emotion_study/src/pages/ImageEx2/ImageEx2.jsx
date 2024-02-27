@@ -27,8 +27,8 @@ const imageLayout = css`
     }
 `;
 
-function ImageEx() {
-    const uploadFilesId = useRef(0); 
+function ImageEx2() {
+    const uploadFilesId = useRef(0);
     const [ oldFiles, setOldFiles ] = useState([]);
     const [ newFiles, setNewFiles ] = useState([]);
     const imgFileRef = useRef();
@@ -38,9 +38,8 @@ function ImageEx() {
     }, []);
 
     const handleFileChange = (e) => {
-        const loadFiles = Array.from(e.target.files);   // 객체를 배열에 담음 변환
-        // [file, file, file]
-
+        
+        const loadFiles = Array.from(e.target.files); 
         if(loadFiles.length === 0) {
             imgFileRef.current.value = "";
             return;
@@ -49,63 +48,43 @@ function ImageEx() {
         const uploadFiles = loadFiles.map(file => {
             return {
                 id: uploadFilesId.current += 1,
-                percent: 0,
+                progressPercent: 0,
                 originFile: file,
                 url: ""
             };
         });
-        // [{ }, { }, { }]
 
-        uploadFilesId.current = 0; // 다음생성을 위해 최기화
-        
-
+        uploadFilesId.current = 0;
 
         let promises = [];
 
-        // new Promise() 생성과 동시에 실행 -> 비동기화
         promises = uploadFiles.map(file => new Promise((resolve) => {
             const fileReader = new FileReader();    
-            //비동기
+           
             fileReader.onload = (e) => {
                 resolve(e.target.result);
             }
 
             fileReader.readAsDataURL(file.originFile);
         }));
-        
-        Promise.all(promises)   // 프로미스에서 resolve가 모두 끝난 후 배열에 담음
-        // [Promise, Promise, Promise]
+
+        Promise.all(promises)   
         .then(result => {
             setNewFiles(result.map((dataUrl, index) => {
                 return {
                     ...uploadFiles[index],
                     preview: dataUrl
                 };
-                // 0(1), 1(2), 3(3)
-                // preview : url
             }));
         });        
     }
 
-     // for(let file of e.target.files) {
-        //     promises = [...promises, new Promise((resolve) => {
-        //         const fileReader = new FileReader();
 
-        //         fileReader.onload = (e) => { //비동기
-        //             resolve(e.target.result);
-        //         }
-        //         fileReader.readAsDataURL(file);
-        //     })];
-        // }
-    // ref(해당 storage, 파일명 )
-    console.log(newFiles)
     const handleImageUpload = () => {
-        
         const promises = newFiles.map(file => new Promise(resolve => {
             const storageRef = ref(storage, `files/test/${uuid()}_${file.originFile.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file.originFile);
             
-            // 업로드 될때
             uploadTask.on(
                 "state_changed",
                 (snapshot) => {
@@ -130,7 +109,6 @@ function ImageEx() {
             );
         }));
 
-       
         Promise.all(promises)
         .then((newFile) => {
             setOldFiles(newFile);
@@ -140,7 +118,6 @@ function ImageEx() {
         });
     }
 
-    
     return (
         <div css={layout}>
             {oldFiles?.map(file => 
@@ -164,4 +141,4 @@ function ImageEx() {
     );
 }
 
-export default ImageEx;
+export default ImageEx2;
