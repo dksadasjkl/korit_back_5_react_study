@@ -34,7 +34,9 @@ function ImageEx2() {
     const imgFileRef = useRef();
 
     useEffect(() => {
-        setOldFiles(!localStorage.getItem("oldFiles") ? [] : JSON.parse(localStorage.getItem("oldFiles")));
+        setOldFiles(!localStorage.getItem("oldFiles") 
+            ? [] 
+            : JSON.parse(localStorage.getItem("oldFiles")));
     }, []);
 
     const handleFileChange = (e) => {

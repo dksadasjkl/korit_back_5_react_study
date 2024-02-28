@@ -64,11 +64,11 @@ export const liList = css`
     color: black;
     
     font-weight: 1000;
-
-    width: 170px;
+    font-size: 12px;
+    width: 125px;
     height: 50px;
     border: 1px solid #dbdbdb;
-    margin-right: 20px;
+    margin-right: 10px;
     
     border-radius: 10px;
     &:hover {
