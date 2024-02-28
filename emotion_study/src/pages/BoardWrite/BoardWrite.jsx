@@ -6,6 +6,7 @@ import { QUILL_MODULES } from "../../constants/quillModules";
 import { useMaxSizeValidateInput } from "../../hooks/InputHook";
 import { useQuillInput } from "../../hooks/quillHook";
 import { useNavigate } from "react-router-dom";
+import { useLoadList } from "../../hooks/boardListHook";
 
 const layout = css`
     display: flex;
@@ -51,27 +52,18 @@ const submitButton = css`
 function BoardWrite() {
     const navigate = useNavigate();
     const boardIdRef = useRef(0);
+    const { boardList, lastId } = useLoadList();
     const [ board, setBoard ] = useState({
         boardId: 0,
         boardTitle: "",
         boardContent: ""
     });
 
-    const boardList = useMemo(() => {
-        const IsBoardList = localStorage.getItem("boardList");
-        
-        return !IsBoardList 
-            ? [] 
-            : JSON.parse(IsBoardList)
-    }, []);
-    
     const [ inputValue, handleInputChange ] = useMaxSizeValidateInput(10); // [0번, 1번] = [0번, 1번] 비구조할당
     const [ quillValue, handleQiillValueChange ] = useQuillInput();
 
     const handleSubmitClick = () => {
-        const lastIndex = boardList.length - 1
-        const lastId = lastIndex < 0 ? 0 : boardList[lastIndex].boardId;
-
+        
         const board = {
             boardId: lastId + 1,
             boardTitle: inputValue,
@@ -96,7 +88,7 @@ function BoardWrite() {
             <ReactQuill style={{
                 width: "90%",
                 height: "400px"
-                }} 
+                }}  
                 modules={QUILL_MODULES}
                 onChange={handleQiillValueChange}
             />
