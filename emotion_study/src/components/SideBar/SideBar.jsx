@@ -23,7 +23,10 @@ function SideBar(props) {
             </button>
             <ul css={S.menuList}>
                 { MENUS.map(menu => 
-                    <Link css={S.menuItem} to={menu.path} key={menu.id} onClick={() => setShow(false)}>
+                    <Link css={S.menuItem} 
+                        to={`${menu.path}${!menu.parms ? "" : "?" + Object.entries(menu.parms).map(([key, value]) => key + "=" + value).join("&")} `} 
+                        key={menu.id} 
+                        onClick={() => setShow(false)}>
                         <li>{menu.name}</li>
                     </Link>)
                 }

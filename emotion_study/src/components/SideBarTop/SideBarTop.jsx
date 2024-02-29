@@ -18,7 +18,10 @@ function SideBarTop(props) {
              </button>
             <ul css={S.ulList}>
                 { MENUS.map(menu => 
-                    <Link css={S.liList} to={menu.path} key={menu.id} onClick={() => setShow(!isShow)}>
+                    <Link css={S.liList} 
+                    to={`${menu.path}${!menu.parms ? "" : "?" + Object.entries(menu.parms).map(([key, value]) => key + "=" + value).join("&")} `} 
+                    key={menu.id} 
+                    onClick={() => setShow(!isShow)}>
                         <li>{menu.name}</li>
                     </Link>)
                 }

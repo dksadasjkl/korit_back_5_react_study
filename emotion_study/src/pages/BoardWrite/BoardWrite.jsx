@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import { QUILL_MODULES } from "../../constants/quillModules";
 import { useMaxSizeValidateInput } from "../../hooks/InputHook";
@@ -59,17 +59,19 @@ function BoardWrite() {
         boardContent: ""
     });
 
-    const [ inputValue, handleInputChange ] = useMaxSizeValidateInput(10); // [0번, 1번] = [0번, 1번] 비구조할당
+    const [ inputValue, handleInputChange ] = useMaxSizeValidateInput(20); // [0번, 1번] = [0번, 1번] 비구조할당
     const [ quillValue, handleQiillValueChange ] = useQuillInput();
 
     const handleSubmitClick = () => {
-        
-        const board = {
-            boardId: lastId + 1,
-            boardTitle: inputValue,
-            boardContent: quillValue
-        };
-        const newBoardList = [...boardList, board];
+        let newBoardList = [];
+        for(let i = 0; i < 203; i++) {
+            const board = {
+                boardId: i + 1, 
+                boardTitle: inputValue + (i + 1),
+                boardContent: quillValue
+            };
+            newBoardList = [...newBoardList, board];
+        }
         localStorage.setItem("boardList", JSON.stringify(newBoardList)); //로컬스토리지에 덮어씀
         alert("글 작성 완료");
         navigate("/board/list");

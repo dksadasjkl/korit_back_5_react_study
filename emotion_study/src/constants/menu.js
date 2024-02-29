@@ -1,7 +1,5 @@
-import BoardEx from "../pages/BoardEx/BoardEx";
 import BoardList from "../pages/BoardList/BoardList";
 import BoardWrite from "../pages/BoardWrite/BoardWrite";
-import ImageEx from "../pages/ImageEx/ImageEx";
 import ImageEx2 from "../pages/ImageEx2/ImageEx2";
 import ImageEx3 from "../pages/ImageEx3/ImageEx3";
 import Mypage from "../pages/Mypage/Mypage";
@@ -46,6 +44,9 @@ export const MENUS = [
     {
         id: 7,
         path: "/board/list",
+        parms: {
+            page: 1
+        },
         name: "게시글 목록",
         element: <BoardList />
     }
