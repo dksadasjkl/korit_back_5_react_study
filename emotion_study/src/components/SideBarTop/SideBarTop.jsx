@@ -8,7 +8,7 @@ import { MENUS } from '../../constants/menu';
 // 1920 960
 // 960 200 200 
 
-function SideBarTop(props) {
+function SideBarTop() {
     const [ isShow, setShow ] = useState(false);
 
     return (

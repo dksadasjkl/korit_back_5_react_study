@@ -107,15 +107,12 @@ function BoardList() {
                 <li css={boardListHeader}>
                     <div>번호</div>
                     <div>제목</div>
-                    
                 </li>
                 {boardList.map(board => 
                 <Link to={`/board/${board.boardId}`} css={boardListItem}>
                     <li>    
-                        
                         <div>{board.boardId}</div>
                         <div>{board.boardTitle}</div>
-                        
                     </li>
                 </Link>
                 )}   
