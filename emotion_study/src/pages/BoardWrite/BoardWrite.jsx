@@ -74,7 +74,7 @@ function BoardWrite() {
         }
         localStorage.setItem("boardList", JSON.stringify(newBoardList)); //로컬스토리지에 덮어씀
         alert("글 작성 완료");
-        navigate("/board/list");
+        navigate("/board/list?page=1");
         
     } 
 
@@ -87,6 +87,7 @@ function BoardWrite() {
                 placeholder="제목을 입력하세요!!!" 
                 onChange={handleInputChange}
                 value={inputValue}/>
+                {/* style, modules, onchange */}
             <ReactQuill style={{
                 width: "90%",
                 height: "400px"

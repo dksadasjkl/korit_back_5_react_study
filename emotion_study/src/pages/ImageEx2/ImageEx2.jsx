@@ -90,11 +90,9 @@ function ImageEx2() {
             uploadTask.on(
                 "state_changed",
                 (snapshot) => {
-                    setNewFiles(newFiles.map(sFile => {
-                        return sFile.id !== file.id ? sFile : {
+                    setNewFiles(newFiles.map(sFile => sFile.id !== file.id ? sFile : {
                             ...sFile, 
                             percent: Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-                        }
                     }));
                 },
                 (error) => {},
